@@ -10,4 +10,6 @@ public class CadastroDeFuncionariosApplication {
 		SpringApplication.run(CadastroDeFuncionariosApplication.class, args);
 	}
 
+
+
 }
