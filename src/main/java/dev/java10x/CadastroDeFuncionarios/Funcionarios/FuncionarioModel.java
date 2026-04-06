@@ -1,4 +1,4 @@
-package dev.java10x.CadastroDeFuncionarios;
+package dev.java10x.CadastroDeFuncionarios.Funcionarios;
 
 import jakarta.persistence.*;
 
