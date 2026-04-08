@@ -1,6 +1,9 @@
 package dev.java10x.CadastroDeFuncionarios.Funcionarios;
 
+import dev.java10x.CadastroDeFuncionarios.Tarefas.TarefasModel;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 @Table (name = "tb_cadatro")
@@ -12,6 +15,8 @@ public class FuncionarioModel {
     private String nome;
     private String email;
     private int idade;
+    private List<TarefasModel> tarefas;
+
 
     public FuncionarioModel() {
     }

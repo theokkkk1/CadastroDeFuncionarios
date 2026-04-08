@@ -14,7 +14,7 @@
 	</parent>
 
 	<groupId>dev.java10x</groupId>
-	<artifactId>CadastroDeNinjas</artifactId>
+	<artifactId>CadastroDeFuncionarios</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
 	<properties>
