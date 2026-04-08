@@ -1,48 +1,74 @@
-🏢 Employee Management API
-API REST para gerenciamento de colaboradores desenvolvida com Java 21 e Spring Boot 3.4. O projeto foca em arquitetura resiliente, versionamento de banco de dados e documentação automatizada, servindo como base para sistemas de RH e ERPs.
+👨‍💼 Employee Management API
 
-🎯 Escopo do Projeto
-O sistema provê uma solução completa para o ciclo de vida do registro de funcionários, garantindo integridade de dados e separação clara de responsabilidades através de uma arquitetura em camadas.
+API REST desenvolvida com Java e Spring Boot para gerenciamento de funcionários, aplicando boas práticas de arquitetura em camadas (MVC) e integração com banco de dados.
 
-Gestão de Registros: CRUD completo (Criação, Leitura, Atualização e Deleção).
+📌 Sobre o Projeto
 
-Persistência Transacional: Garantia de consistência em operações de escrita via Spring Data JPA.
+Este projeto tem como objetivo implementar uma API completa para cadastro e gerenciamento de funcionários, simulando um sistema real de controle corporativo.
 
-Versionamento de Schema: Evolução do banco de dados controlada por scripts SQL (Flyway).
+A aplicação foi construída seguindo princípios de engenharia de software, com separação de responsabilidades e organização em camadas (Controller, Service, Repository e Model).
 
-Contrato de API: Documentação técnica padronizada via OpenAPI 3.0.
+🚀 Tecnologias Utilizadas
+Java
+Spring Boot
+Spring Web
+Spring Data JPA
+H2 Database
+Flyway (Migration)
+Swagger (OpenAPI)
+Maven
+Git
+🏗️ Arquitetura
 
-🛠️ Stack Técnica
-Linguagem: Java 21 (Records e Pattern Matching).
+O projeto segue o padrão MVC + Service Layer, garantindo organização e escalabilidade:
 
-Framework: Spring Boot 3.4+ (Web, Data JPA, Validation).
+Controller: Responsável pelos endpoints da API
+Service: Contém as regras de negócio
+Repository: Comunicação com o banco de dados
+Model: Representação das entidades
+⚙️ Funcionalidades
+Cadastro de funcionários
+Listagem de funcionários
+Atualização de dados
+Remoção de funcionários
+Controle estruturado de dados
+Documentação automática da API com Swagger
+🗄️ Banco de Dados
+Banco em memória utilizando H2
+Versionamento de banco com Flyway Migration
+Scripts SQL organizados para criação e evolução das tabelas
+📡 Endpoints
+Método	Rota	Descrição
+POST	/funcionarios	Cadastrar funcionário
+GET	/funcionarios	Listar todos
+GET	/funcionarios/{id}	Buscar por ID
+PUT	/funcionarios/{id}	Atualizar funcionário
+DELETE	/funcionarios/{id}	Remover funcionário
+📑 Documentação (Swagger)
 
-Banco de Dados: H2 Database (Runtime in-memory).
+Após rodar a aplicação, acesse:
 
-Migrations: Flyway.
+http://localhost:8080/swagger-ui.html
 
-Documentação: Swagger UI / SpringDoc.
+Interface interativa para testar todos os endpoints da API.
 
-Build: Maven.
+▶️ Como Executar o Projeto
+1. Clonar o repositório
+git clone https://github.com/theokkkk1/employee-management-api.git
+cd employee-management-api
+2. Executar a aplicação
+./mvnw spring-boot:run
 
-📐 Estrutura de Domínio
-A entidade principal Employee é composta pelos seguintes atributos obrigatórios:
+ou
 
-id: Identificador único (Auto-increment).
+mvn spring-boot:run
+3. Acessar
+API: http://localhost:8080
+Swagger: http://localhost:8080/swagger-ui.html
+H2 Console: http://localhost:8080/h2-console
+🧪 Testes
 
-name: Nome completo do colaborador.
+Os endpoints podem ser testados via:
 
-role: Cargo ou função técnica.
-
-salary: Remuneração (Precisão decimal).
-
-createdAt: Registro temporal de inserção.
-
-🧩 Camadas da Aplicação
-Controller: Gerenciamento de protocolos HTTP e status codes.
-
-Service: Validações e lógica de negócio.
-
-Repository: Interface de comunicação com o banco H2.
-
-DTO: Camada de transferência para segurança dos dados internos.
+Swagger UI
+Postman
