@@ -15,7 +15,11 @@ public class FuncionarioModel {
     private String nome;
     private String email;
     private int idade;
-    private List<TarefasModel> tarefas;
+
+    //@ManyToOne UM FUNCIONARIO TEM UMA UNICA TAREFA
+    @ManyToOne
+    @JoinColumn(name= "tarefas_id") //Foreing key ou chave estrangeira
+    private TarefasModel tarefasModel;
 
 
     public FuncionarioModel() {
