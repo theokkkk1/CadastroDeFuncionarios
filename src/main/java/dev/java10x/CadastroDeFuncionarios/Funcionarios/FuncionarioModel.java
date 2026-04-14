@@ -12,13 +12,19 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class FuncionarioModel {
-    //@ManyToOne UM FUNCIONARIO TEM UMA UNICA TAREFA
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String nome;
+
+    @Column(unique = true)
     private String email;
+
     private int idade;
+
+    //@ManyToOne UM FUNCIONARIO TEM UMA UNICA TAREFA
     @ManyToOne
     @JoinColumn(name= "tarefas_id") //Foreing key ou chave estrangeira
     private TarefasModel tarefas;

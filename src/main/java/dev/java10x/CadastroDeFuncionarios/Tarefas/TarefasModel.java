@@ -14,12 +14,16 @@ import java.util.List;
 @AllArgsConstructor
 @Data
 public class TarefasModel {
-    // @OneToMany Uma tarefa pode ter varios funcionarios
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String nome;
+
     private String dificuldade;
+
+    // @OneToMany Uma tarefa pode ter varios funcionarios
     @OneToMany(mappedBy = "tarefas")
     private List<FuncionarioModel> funcionarioModels;
 
