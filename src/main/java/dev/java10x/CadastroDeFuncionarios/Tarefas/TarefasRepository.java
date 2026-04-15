@@ -1,4 +1,7 @@
 package dev.java10x.CadastroDeFuncionarios.Tarefas;
 
-public class TarefasRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface TarefasRepository extends JpaRepository<TarefasModel, Long> {
+
 }
