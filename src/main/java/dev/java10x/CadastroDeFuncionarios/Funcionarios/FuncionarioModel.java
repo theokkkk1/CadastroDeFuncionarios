@@ -7,7 +7,7 @@ import lombok.*;
 import java.util.List;
 
 @Entity
-@Table (name = "tb_cadatro")
+@Table (name = "tb_cadastro")
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
@@ -16,7 +16,7 @@ public class FuncionarioModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private long id;
+    private Long id;
 
     @Column(name = "nome")
     private String nome;
