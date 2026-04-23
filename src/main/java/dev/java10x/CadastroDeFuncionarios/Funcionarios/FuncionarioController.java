@@ -3,7 +3,7 @@ package dev.java10x.CadastroDeFuncionarios.Funcionarios;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping
+@RequestMapping({"/funcionarios"})
 public class FuncionarioController {
 
     @GetMapping("/boasvindas")
@@ -18,13 +18,13 @@ public class FuncionarioController {
     }
 
     //Mostrar Todos Funcionarios (READ)
-    @GetMapping ("/todos")
+    @GetMapping ("/listar")
     public String mostrarFuncionario(){
         return "Mostrar Funcionario";
     }
 
     //Mostrar Funcionarios por ID (READ)
-    @GetMapping ("/mostrarporid")
+    @GetMapping ("/listarid")
     public String mostrarIDFuncionario(){
         return "Mostrar Funcionario por ID";
     }
