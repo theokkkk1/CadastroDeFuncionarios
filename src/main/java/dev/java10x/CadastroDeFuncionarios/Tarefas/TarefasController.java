@@ -3,7 +3,7 @@ package dev.java10x.CadastroDeFuncionarios.Tarefas;
 import org.springframework.web.bind.annotation.*;
 
 @RestController //Diz pro Spring: “essa classe responde requisições HTTP”
-@RequestMapping("tarefas") // Indica que tudo vai ser mapeado aqui. Define caminho base ou rota
+@RequestMapping("/tarefas") // Indica que tudo vai ser mapeado aqui. Define caminho base ou rota
 public class TarefasController {
 
     // GET -- Mandar uma requisicao para mostrar as tarefas
