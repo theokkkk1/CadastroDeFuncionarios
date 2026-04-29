@@ -4,8 +4,10 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
          https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <!-- Versão do modelo do Maven -->
     <modelVersion>4.0.0</modelVersion>
 
+    <!-- Define o Spring Boot como projeto pai (gerencia versões automaticamente) -->
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -13,26 +15,31 @@
         <relativePath/>
     </parent>
 
+    <!-- Identificação do projeto -->
     <groupId>dev.java10x</groupId>
     <artifactId>CadastroDeFuncionarios</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
+    <!-- Configuração da versão do Java -->
     <properties>
         <java.version>21</java.version>
     </properties>
 
     <dependencies>
 
+        <!-- Starter Web: cria APIs REST, usa Spring MVC + Tomcat embutido -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <!-- JPA: persistência de dados com Hibernate (ORM) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
         </dependency>
 
+        <!-- Lombok: reduz código boilerplate (getters, setters, construtores) -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
@@ -40,6 +47,7 @@
             <optional>true</optional>
         </dependency>
 
+        <!-- Banco de dados H2 (em memória, usado para testes e desenvolvimento) -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -47,30 +55,37 @@
             <scope>runtime</scope>
         </dependency>
 
+        <!-- Dependências para testes (JUnit, Mockito, etc.) -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Flyway: controle de versionamento e migração do banco de dados -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
 
+            <!-- Plugin de compilação do Java -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.11.0</version>
                 <configuration>
+                    <!-- Define versão de compilação -->
                     <source>21</source>
                     <target>21</target>
                 </configuration>
             </plugin>
 
+            <!-- Plugin do Spring Boot para empacotar e rodar a aplicação -->
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
