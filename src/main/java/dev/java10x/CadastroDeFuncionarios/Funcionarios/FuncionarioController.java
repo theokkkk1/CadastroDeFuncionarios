@@ -32,9 +32,9 @@ public class FuncionarioController{
     }
 
     //Mostrar Funcionarios por ID (READ)
-    @GetMapping ("/listarid")
-    public String mostrarIDFuncionario(){
-        return "Mostrar Funcionario por ID";
+    @GetMapping ("/listar/{id}")
+    public FuncionarioModel mostrarIDFuncionario(@PathVariable Long id){
+        return funcionarioService.listarFuncionarioPorId(id);
     }
 
     //Alterar dados do Funcionario (UPDATE)
