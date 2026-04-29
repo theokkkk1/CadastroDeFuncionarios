@@ -35,6 +35,7 @@ public class FuncionarioController{
     @GetMapping ("/listar/{id}")
     public FuncionarioModel mostrarIDFuncionario(@PathVariable Long id){
         return funcionarioService.listarFuncionarioPorId(id);
+
     }
 
     //Alterar dados do Funcionario (UPDATE)
