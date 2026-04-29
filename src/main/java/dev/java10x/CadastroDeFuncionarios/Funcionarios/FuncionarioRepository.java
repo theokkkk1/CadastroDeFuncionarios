@@ -1,4 +1,5 @@
 package dev.java10x.CadastroDeFuncionarios.Funcionarios;
+import org.springframework.data.jpa.repository.JpaRepository;
 
-public class FuncionarioRepository {
+public interface FuncionarioRepository extends JpaRepository<FuncionarioModel, Long> {
 }
