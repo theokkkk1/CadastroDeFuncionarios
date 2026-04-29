@@ -1,5 +1,6 @@
 package dev.java10x.CadastroDeFuncionarios.Tarefas;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import dev.java10x.CadastroDeFuncionarios.Funcionarios.FuncionarioModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,7 +29,9 @@ public class TarefasModel {
 
     // @OneToMany Uma tarefa pode ter varios funcionarios
     @OneToMany(mappedBy = "tarefas")
+    @JsonIgnore
     private List<FuncionarioModel> funcionarioModels;
+
 
 
 
