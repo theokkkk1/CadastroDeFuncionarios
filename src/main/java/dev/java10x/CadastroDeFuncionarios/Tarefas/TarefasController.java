@@ -2,34 +2,48 @@ package dev.java10x.CadastroDeFuncionarios.Tarefas;
 
 import org.springframework.web.bind.annotation.*;
 
-@RestController //Diz pro Spring: “essa classe responde requisições HTTP”
-@RequestMapping("/tarefas") // Indica que tudo vai ser mapeado aqui. Define caminho base ou rota
+import java.util.List;
+
+@RestController
+@RequestMapping("/tarefas")
 public class TarefasController {
 
-    // GET -- Mandar uma requisicao para mostrar as tarefas
+    private TarefasService tarefasService;
+
+    public TarefasController(TarefasService tarefasService) {
+        this.tarefasService = tarefasService;
+    }
+
+    // Listar todas tarefas
     @GetMapping("/listar")
-    public String listarTarefa(){
-        return "Tarefas listadas com sucesso";
+    public List<TarefasModel> listarTarefas(){
+        return tarefasService.listarTarefas();
     }
-    // POST -- Mandar uma requisicao para criar as tarefas
+
+    // Listar tarefa por id
+    @GetMapping("/listar/{id}")
+    public TarefasModel listarTarefaPorId(@PathVariable Long id){
+        return tarefasService.listarTarefaPorId(id);
+    }
+
+    // Criar tarefa
     @PostMapping("/criar")
-    public String criarTarefa(){
-        return "Tarefa criada com sucesso";
+    public TarefasModel criarTarefa(@RequestBody TarefasModel tarefa){
+        return tarefasService.criarTarefa(tarefa);
     }
 
-    // PUT -- Mandar uma requisicao para alterar as tarefas
-    @PutMapping("/alterar")
-    public String alterarTarefa(){
-        return "Tarefa alterada com sucesso";
+    // Atualizar tarefa
+    @PutMapping("/alterar/{id}")
+    public TarefasModel atualizarTarefa(
+            @PathVariable Long id,
+            @RequestBody TarefasModel tarefa){
+
+        return tarefasService.atualizarTarefa(id, tarefa);
     }
 
-    // DELETE -- Mandar uma requisicao para deletar as tarefas
-    @DeleteMapping("/Deletar")
-    public String deletarTarefa(){
-        return "tarefa deletada com sucesso";
+    // Deletar tarefa
+    @DeleteMapping("/deletar/{id}")
+    public void deletarTarefa(@PathVariable Long id){
+        tarefasService.deletarTarefaPorId(id);
     }
-
-
-
-
 }
