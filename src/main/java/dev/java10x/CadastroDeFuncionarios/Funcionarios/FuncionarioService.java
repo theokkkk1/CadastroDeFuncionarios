@@ -9,9 +9,11 @@ import java.util.List;
 public class FuncionarioService {
 
     private FuncionarioRepository funcionarioRepository;
+    private FuncionarioMapper funcionarioMapper;
 
-    public FuncionarioService(FuncionarioRepository funcionarioRepository) {
+    public FuncionarioService(FuncionarioRepository funcionarioRepository, FuncionarioMapper funcionarioMapper) {
         this.funcionarioRepository = funcionarioRepository;
+        this.funcionarioMapper = funcionarioMapper;
     }
 
     // Listar todos os meus Funcionarios
@@ -25,8 +27,11 @@ public class FuncionarioService {
     }
 
     // Criar todos os meus Funcionarios
-    public FuncionarioModel criarFuncionario(FuncionarioModel funcionario){
-        return funcionarioRepository.save(funcionario);
+    public FuncionarioDTO criarFuncionario(FuncionarioDTO funcionarioDTO){
+        FuncionarioModel funcionario = funcionarioMapper.map(funcionarioDTO);
+       funcionario = funcionarioRepository.save(funcionario);
+       return funcionarioMapper.map(funcionario);
+
     }
 
     //Deletar o funcionario por id -- tem que ser um metodo void
