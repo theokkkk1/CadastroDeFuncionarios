@@ -3,29 +3,53 @@ package dev.java10x.CadastroDeFuncionarios.Tarefas;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class TarefasService {
 
     private TarefasRepository tarefasRepository;
+    private TarefasMapper tarefasMapper;
 
-    public TarefasService(TarefasRepository tarefasRepository) {
+    public TarefasService(
+            TarefasRepository tarefasRepository,
+            TarefasMapper tarefasMapper) {
+
         this.tarefasRepository = tarefasRepository;
+        this.tarefasMapper = tarefasMapper;
     }
 
     // Listar todas as tarefas
-    public List<TarefasModel> listarTarefas(){
-        return tarefasRepository.findAll();
+    public List<TarefasDTO> listarTarefas(){
+
+        List<TarefasModel> tarefas = tarefasRepository.findAll();
+
+        return tarefas.stream()
+                .map(tarefasMapper::map)
+                .collect(Collectors.toList());
     }
 
     // Listar tarefa por id
-    public TarefasModel listarTarefaPorId(Long id){
-        return tarefasRepository.findById(id).orElse(null);
+    public TarefasDTO listarTarefaPorId(Long id){
+
+        Optional<TarefasModel> tarefaId =
+                tarefasRepository.findById(id);
+
+        return tarefaId
+                .map(tarefasMapper::map)
+                .orElse(null);
     }
 
     // Criar tarefa
-    public TarefasModel criarTarefa(TarefasModel tarefa){
-        return tarefasRepository.save(tarefa);
+    public TarefasDTO criarTarefa(TarefasDTO tarefasDTO){
+
+        TarefasModel tarefa =
+                tarefasMapper.map(tarefasDTO);
+
+        tarefa = tarefasRepository.save(tarefa);
+
+        return tarefasMapper.map(tarefa);
     }
 
     // Deletar tarefa
@@ -34,13 +58,24 @@ public class TarefasService {
     }
 
     // Atualizar tarefa
-    public TarefasModel atualizarTarefa(Long id, TarefasModel tarefa){
+    public TarefasDTO atualizarTarefa(
+            Long id,
+            TarefasDTO tarefasDTO){
 
-        if(tarefasRepository.existsById(id)){
+        Optional<TarefasModel> tarefaExistente =
+                tarefasRepository.findById(id);
 
-            tarefa.setId(id);
+        if(tarefaExistente.isPresent()){
 
-            return tarefasRepository.save(tarefa);
+            TarefasModel tarefaAtualizada =
+                    tarefasMapper.map(tarefasDTO);
+
+            tarefaAtualizada.setId(id);
+
+            TarefasModel tarefaSalva =
+                    tarefasRepository.save(tarefaAtualizada);
+
+            return tarefasMapper.map(tarefaSalva);
         }
 
         return null;
