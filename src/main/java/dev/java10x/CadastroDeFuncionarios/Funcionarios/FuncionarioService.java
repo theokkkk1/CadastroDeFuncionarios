@@ -4,29 +4,43 @@ import jakarta.persistence.Id;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class FuncionarioService {
 
     private FuncionarioRepository funcionarioRepository;
+    private FuncionarioMapper funcionarioMapper;
 
-    public FuncionarioService(FuncionarioRepository funcionarioRepository) {
+    public FuncionarioService(FuncionarioRepository funcionarioRepository, FuncionarioMapper funcionarioMapper) {
         this.funcionarioRepository = funcionarioRepository;
+        this.funcionarioMapper = funcionarioMapper;
     }
 
-    // Listar todos os meus Funcionarios
-    public List<FuncionarioModel> listarFuncionarios(){
-        return funcionarioRepository.findAll();
+
+    public List<FuncionarioDTO> listarFuncionarios(){
+        List<FuncionarioModel> funcionario = funcionarioRepository.findAll();
+        return funcionario.stream()
+                .map(funcionarioMapper::map)
+                .collect(Collectors.toList());
+
     }
 
-    //Listar Funcionario por Id
-    public FuncionarioModel listarFuncionarioPorId(Long id){
-        return funcionarioRepository.findById(id).orElse(null);
+
+    public FuncionarioDTO listarFuncionarioPorId(Long id){
+        Optional<FuncionarioModel> funcionarioID = funcionarioRepository.findById(id);
+        return funcionarioID.map(funcionarioMapper::map).orElse(null);
+
     }
 
-    // Criar todos os meus Funcionarios
-    public FuncionarioModel criarFuncionario(FuncionarioModel funcionario){
-        return funcionarioRepository.save(funcionario);
+
+    public FuncionarioDTO criarFuncionario(FuncionarioDTO funcionarioDTO){
+        FuncionarioModel funcionario = funcionarioMapper.map(funcionarioDTO);
+        funcionario = funcionarioRepository.save(funcionario);
+        return funcionarioMapper.map(funcionario);
+
     }
 
     //Deletar o funcionario por id -- tem que ser um metodo void
@@ -35,13 +49,17 @@ public class FuncionarioService {
     }
 
         //atualizar o funcionario
-        public FuncionarioModel atualizarFuncioncionario(Long id,FuncionarioModel funcionario){
-            if(funcionarioRepository.existsById(id)){
-                funcionario.setId(id);
-                return funcionarioRepository.save(funcionario);
-
+        public FuncionarioDTO atualizarFuncioncionario(Long id,FuncionarioDTO funcionarioDTO){
+            Optional<FuncionarioModel> funcionarioExistente = funcionarioRepository.findById(id);
+            if(funcionarioExistente.isPresent()){
+                FuncionarioModel funcionarioAtualizado = funcionarioMapper.map(funcionarioDTO);
+                funcionarioAtualizado.setId(id);
+                FuncionarioModel funcionariosalvo = funcionarioRepository.save(funcionarioAtualizado);
+                return funcionarioMapper.map(funcionariosalvo);
             }
             return null;
+
+
         }
 
 

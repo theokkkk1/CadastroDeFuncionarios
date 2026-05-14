@@ -30,6 +30,12 @@ public class FuncionarioModel {
     @Column(name = "idade")
     private int idade;
 
+    @Column(unique= true, name = "cpf", length = 11)
+    private String cpf;
+
+    @Column(name ="telefone", length = 20)
+    private String telefone;
+
     //@ManyToOne UM FUNCIONARIO TEM UMA UNICA TAREFA
     @ManyToOne
     @JoinColumn(name= "tarefas_id") //Foreing key ou chave estrangeira
